@@ -456,7 +456,7 @@ describe("Final Testing For All over", () => {
 
     })
 
-    it.only("View Running Process",()=>{
+    it("View Running Process",()=>{
         // (Login process)
         cy.visit("https://mohan.on.joget.cloud/jw/web/console/monitor/running")
         cy.viewport(1536, 960);
