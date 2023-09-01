@@ -132,7 +132,7 @@ describe("Final Testing For All over", () => {
 
 
         //verify DEADLINE WITH ESCALATION (SYNC)
-        cy.get(".runProcess-body-content").eq(0).should('contain', "Deadline with Escalation (Sync)")
+        cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div[1]/div").eq(0).should('contain', "Deadline with Escalation (Sync)")
         cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div[1]").should("contain", "Process Deadline with Escalation (Synchronous)");
         cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div[1]").should("contain", "Select Activity User 1 ");
         cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div[1]").should("contain", "Select Activity User 2 ");
@@ -212,10 +212,10 @@ describe("Final Testing For All over", () => {
 
         // verify Process Deadline with Escalation (Synchronous)_ListInbox
         cy.url("https://mohan.on.joget.cloud/jw/web/userview/jtdeadline/h/_/i1")
-        cy.get(".datalist-body-content").should('contain', "Process Deadline with Escalation (Synchronous)")
-        cy.get(".datalist-body-content").should('contain', "Deadline with Synchronous Escalations illustrate a process design where, on the trigger of the deadline timer, Activity 1 will no longer be active when the escalation to Activity 2 is triggered. Activity 1 task will be aborted and closed. The List Inbox will only display the task for Activity 2.", "o not click on the pending task and refresh this inbox frequently to view deadline working.")
-        cy.get(".datalist-body-content").should('contain', "")
-        cy.get(".datalist-body-content").should('contain', "#", "ID", "Activity 1 User", "Activity 1 Status", "Activity 2 User", "Activity 2 Status", "Deadline Limit", "Created");
+        cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div").should('contain', "Process Deadline with Escalation (Synchronous)")
+        cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div").should('contain', "Deadline with Synchronous Escalations illustrate a process design where, on the trigger of the deadline timer, Activity 1 will no longer be active when the escalation to Activity 2 is triggered. Activity 1 task will be aborted and closed. The List Inbox will only display the task for Activity 2.", "o not click on the pending task and refresh this inbox frequently to view deadline working.")
+        cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div").should('contain', "")
+        cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div").should('contain', "#", "ID", "Activity 1 User", "Activity 1 Status", "Activity 2 User", "Activity 2 Status", "Deadline Limit", "Created");
         cy.get('#EscalationSync tbody tr') // Select all table rows
             .each((row) => {
                 cy.wrap(row)
