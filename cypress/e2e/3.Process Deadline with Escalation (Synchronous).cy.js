@@ -85,8 +85,10 @@ describe("Process Deadline with Escalation (Synchronous)", () => {
         cy.wait(2000)
 
         cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div[1]/fieldset/form/div[1]/div[2]/div[3]/input").clear().type('2')
+        cy.wait(2000)
 
         cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div[1]/fieldset/form/div[2]/div[2]/div/i/input").click();
+        cy.wait(2000)
 
         // verify Process Deadline with Escalation (Synchronous)_ListInbox
 

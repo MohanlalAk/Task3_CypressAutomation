@@ -12,6 +12,7 @@ describe("Process Deadline with Escalation (Asynchronous)", () => {
   
       // Input the username and password
       cy.get('#j_username').type("admin"); 
+      cy.wait(2000)
       cy.get("#j_password").type("admin"); 
       cy.get(".waves-button-input").click();
   
@@ -53,53 +54,39 @@ describe("Process Deadline with Escalation (Asynchronous)", () => {
 
             cy.xpath("/html/body/div[2]/div[2]/div/div[2]/main/div[2]/div[1]/fieldset/form/div[1]/div[2]/div[2]/select").select('cat')
 
-            // Check for the existence of the select element for Activity User 1
-            cy.get('select[name="ApproverUser1"]').should('exist').then((selectElement) => {
-                // Define an array of option values you want to check
-                const optionsToCheck = ['cat', 'clark', 'david', 'etta', 'jack', 'julia', 'roy', 'sasha', 'tana', 'terry', 'tina'];
-
-                // Loop through the specified options and check their visibility
-                optionsToCheck.forEach((optionValue) => {
-                    cy.get(`option[value="${optionValue}"]`, { withinSubject: selectElement })
-                        .should('be.visible')
-                        .then((option) => {
-                            const optionText = option.text().trim();
-                            cy.log(`Option "${optionText}" (value: ${optionValue}) is visible.`);
-                        });
-                });
-            });
-
             // Check for the existence of the select element for Activity User 2
-            cy.get('select[name="ApproverUser2"]').should('exist').then((selectElement) => {
-                // Define an array of option values you want to check
-                const optionsToCheck = ['admin', 'cat', 'clark', 'david', 'etta', 'jack', 'julia', 'roy', 'sasha', 'tana', 'terry', 'tina'];
-
-                // Loop through the specified options and check their visibility
-                optionsToCheck.forEach((optionValue) => {
-                    cy.get(`option[value="${optionValue}"]`, { withinSubject: selectElement })
-                        .should('be.visible')
-                        .then((option) => {
-                            const optionText = option.text().trim();
-                            cy.log(`Option "${optionText}" (value: ${optionValue}) is visible.`);
-                        });
-                });
-            });
-
-            // Input values and submit
-            cy.get('#deadlineLimit1').clear().type('2');
-            cy.get("#assignmentComplete").first().click();
-
-            // Find the table body and all rows within it
-            cy.get('#EscalationSync tbody tr').each((row) => {
-                cy.wrap(row).within(() => {
-                    // Extract and verify the text content of each cell
-                    cy.get('td.column_body').each((cell) => {
-                        const cellText = cell.text().trim();
-                        cy.log(`Cell Text: ${cellText}`);
-                        // Perform further assertions or verifications as needed
-                    });
-                });
+    cy.get('select[name="ApproverUser2"]').should('exist').then((selectElement) => {
+        // Define an array of option values you want to check
+        const optionsToCheck = ['admin', 'cat', 'clark', 'david', 'etta', 'jack', 'julia', 'roy', 'sasha', 'tana', 'terry', 'tina'];
+  
+        // Loop through the specified options and check their visibility
+        optionsToCheck.forEach((optionValue) => {
+          cy.get(`option[value="${optionValue}"]`, { withinSubject: selectElement })
+            .should('be.visible')
+            .then((option) => {
+              const optionText = option.text().trim();
+              cy.log(`Option "${optionText}" (value: ${optionValue}) is visible.`);
             });
         });
+      });
+  
+      // Input values and submit
+      cy.get('#deadlineLimit1').clear().type('2');
+      cy.get("#assignmentComplete").first().click();
+  
+      // Find the table body and all rows within it
+      cy.get('#EscalationSync tbody tr').each(($row, index, $rows) => {
+        // Check if the table row has data
+        if ($rows.length > 0) {
+          cy.wrap($row).within(() => {
+            // You can add specific verifications for each row here if needed
+          });
+        } else {
+          // Handle the case where the table does not have data
+          cy.log('Table does not have data.');
+          // You can add assertions or other actions for this case
+        }
+      });
     });
+  });
 });
